@@ -26,5 +26,25 @@ SELECT * FROM addressBook WHERE state = 'Maharashtra';
 ------- UC7 --------------------------
 SELECT city, COUNT(city) AS cityCount FROM addressBook GROUP BY city;
 SELECT state, COUNT(state) AS stateCount FROM addressBook GROUP BY state;
-------- UC8 --------------------------
-SELECT * FROM addressBook WHERE city = 'Pune' ORDER BY firstName;
+
+------- UC8 : Retrieves entries sorted alphabatically by person's name--------------------------
+INSERT INTO  addressBook(firstName, lastName, address, city, state, zip, phoneNumber, email)VALUES
+('Dilip', 'Rathod', 'Dhule', 'pune', 'Maharashtra', '424105', '1122334466', 'dilip@gmail.com'),
+('Ganesh', 'Chavan', 'Bhadgaon', 'Pune', 'Maharashtra', '424108', '6666655555', 'ganesh@gmail.com'),
+('Krishabh', 'Rathod', 'Chalisgaon', 'Nashik', 'Maharashtra', '424106', '4433221155', 'krishabh@gmail.com');
+
+SELECT * FROM addressBook WHERE city = 'Pune' ORDER BY firstName ASC;
+SELECT * FROM addressBook;
+
+------- UC9:identify each address book with name and type --------------------------
+
+ALTER table addressBook ADD Type VARCHAR(20);
+ALTER table addressBook ADD fullName AS firstName + ' ' + lastName;
+SELECT * FROM addressBook;
+UPDATE addressBook SET type = 'FRIENDS';
+UPDATE addressBook SET type = 'FAMILY' WHERE firstName = 'Arjun' or firstName = 'Ganesh';
+UPDATE addressBook SET type = 'PROFESSION' WHERE firstName = 'Dilip';
+ALTER TABLE addressBook DROP COLUMN Name;
+SELECT * FROM addressBook;
+------- UC10:Get the number of contact person count by Type --------------------------
+SELECT type, COUNT(*) AS typeCount FROM addressBook GROUP BY type;
