@@ -38,7 +38,7 @@ SELECT * FROM addressBook;
 
 ------- UC9:identify each address book with name and type --------------------------
 
-ALTER table addressBook ADD Type VARCHAR(20);
+ALTER table addressBook ADD type VARCHAR(20);
 ALTER table addressBook ADD fullName AS firstName + ' ' + lastName;
 SELECT * FROM addressBook;
 UPDATE addressBook SET type = 'FRIENDS';
@@ -48,3 +48,9 @@ ALTER TABLE addressBook DROP COLUMN Name;
 SELECT * FROM addressBook;
 ------- UC10:Get the number of contact person count by Type --------------------------
 SELECT type, COUNT(*) AS typeCount FROM addressBook GROUP BY type;
+
+--------------- UC11:to add person to both friend and family ---------------------------------
+
+INSERT INTO  addressBook (firstName, lastName, address, city, state, zip, phoneNumber, email , type)VALUES
+('Pradip', 'Jadhav', 'Parola', 'Jalgoan', 'Maharashtra', '424100', '7766554433', 'pradip@gmail.com', 'FAMILY');
+SELECT * FROM addressBook;
